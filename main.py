@@ -1,41 +1,61 @@
-# Plants vs. Zombies Game Implementation
+import pygame
+import random
 
+# Constants
+SCREEN_WIDTH = 800
+SCREEN_HEIGHT = 600
+FPS = 60
+
+# Initialize Pygame
+pygame.init()
+
+# Set up the screen
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+pygame.display.set_caption("Plants vs. Zombies")
+
+# Load images
 class Plant:
-    def __init__(self, name, cost):
-        self.name = name
-        self.cost = cost
-        self.health = 100
-
-    def attack(self):
-        return "I am attacking!"
+    def __init__(self, x, y):
+        self.image = pygame.image.load('plant.png')
+        self.rect = self.image.get_rect(topleft=(x, y))
+    
+    def draw(self, surface):
+        surface.blit(self.image, self.rect)
 
 class Zombie:
-    def __init__(self, type, health):
-        self.type = type
-        self.health = health
+    def __init__(self, x, y):
+        self.image = pygame.image.load('zombie.png')
+        self.rect = self.image.get_rect(topleft=(x, y))
+    
+    def move(self):
+        self.rect.x -= 1
 
-    def eat_brain(self):
-        return "Brains!"
+    def draw(self, surface):
+        surface.blit(self.image, self.rect)
 
-class Game:
-    def __init__(self):
-        self.plants = []
-        self.zombies = []
+# Game loop
+plants = [Plant(100, 500)]
+zombies = [Zombie(800, 500)]
+clock = pygame.time.Clock()
 
-    def add_plant(self, plant):
-        self.plants.append(plant)
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
 
-    def add_zombie(self, zombie):
-        self.zombies.append(zombie)
+    screen.fill((255, 255, 255))
+    
+    # Update zombies
+    for zombie in zombies:
+        zombie.move()
+        zombie.draw(screen)
 
-    def start_game(self):
-        print("Game started!")
+    # Draw plants
+    for plant in plants:
+        plant.draw(screen)
 
-# Example usage
-if __name__ == '__main__':
-    game = Game()
-    peashooter = Plant("Peashooter", 100)
-    zombie = Zombie("Regular Zombie", 100)
-    game.add_plant(peashooter)
-    game.add_zombie(zombie)
-    game.start_game()
+    pygame.display.flip()
+    clock.tick(FPS)
+
+pygame.quit()
