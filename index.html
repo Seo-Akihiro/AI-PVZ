@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plants vs Zombies - Web Edition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <div class="header">
+            <h1>Plants vs Zombies</h1>
+            <div class="sun-counter">
+                <span class="sun-icon">☀️</span>
+                <span id="sunCount">100</span>
+            </div>
+            <div class="game-status">
+                <span id="gameStatus">ゲーム進行中</span>
+            </div>
+        </div>
+
+        <div class="plant-selection">
+            <div class="plant-card" data-plant="sunflower" data-cost="50">
+                <div class="plant-icon">🌻</div>
+                <div class="plant-cost">50</div>
+                <div class="plant-name">ひまわり</div>
+            </div>
+            <div class="plant-card" data-plant="peashooter" data-cost="100">
+                <div class="plant-icon">🌿</div>
+                <div class="plant-cost">100</div>
+                <div class="plant-name">豆鉄砲</div>
+            </div>
+            <div class="plant-card" data-plant="wallnut" data-cost="50">
+                <div class="plant-icon">🥜</div>
+                <div class="plant-cost">50</div>
+                <div class="plant-name">壁ナッツ</div>
+            </div>
+        </div>
+
+        <div class="game-field">
+            <div class="grid-container" id="gameGrid">
+                <!-- グリッドはJavaScriptで生成 -->
+            </div>
+            
+            <div class="projectiles-container" id="projectilesContainer">
+                <!-- 豆の弾丸がここに表示される -->
+            </div>
+            
+            <div class="zombies-container" id="zombiesContainer">
+                <!-- ゾンビがここに表示される -->
+            </div>
+        </div>
+
+        <div class="controls">
+            <button id="restartBtn">ゲームリスタート</button>
+            <button id="pauseBtn">一時停止</button>
+        </div>
+    </div>
+
+    <div class="game-over-modal" id="gameOverModal" style="display: none;">
+        <div class="modal-content">
+            <h2 id="gameOverTitle">ゲームオーバー</h2>
+            <p id="gameOverMessage">ゾンビが家に侵入しました！</p>
+            <button id="restartFromModal">もう一度プレイ</button>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
